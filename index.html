@@ -1,0 +1,1247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbf5ec">
+<title>Our Coupon Book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Caveat+Brush&family=Chewy&family=Fredoka:wght@500;700&family=Gochi+Hand&family=Kalam:wght@400;700&family=Londrina+Solid:wght@400;900&family=Nunito:wght@400;600;800&family=Pacifico&family=Patrick+Hand&family=Permanent+Marker&family=Shadows+Into+Light+Two&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbf5ec; --panel:#ffffff; --ink:#2b2233; --muted:#7a6f80; --line:#eadfd3;
+  --accent:#e0457b; --accent-2:#ffb347; --accent-ink:#fff; --soft:#fdeef3;
+  --radius:18px; --shadow:0 2px 10px rgba(70,40,60,.08);
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#1b1720; --panel:#262030; --ink:#f4edf6; --muted:#aa9fb2; --line:#3a3244; --soft:#3a2432; --shadow:0 2px 10px rgba(0,0,0,.3); }
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:'Nunito',system-ui,-apple-system,Segoe UI,Roboto,sans-serif; font-size:15px; line-height:1.4;
+  -webkit-tap-highlight-color:transparent;
+}
+button,input,select,textarea{font:inherit;color:inherit}
+h1,h2,h3{margin:0}
+.muted{color:var(--muted)}
+small{color:var(--muted)}
+
+/* ---------- header / nav ---------- */
+header.top{
+  display:flex; align-items:center; gap:16px; padding:12px 20px;
+  max-width:1240px; margin:0 auto;
+}
+.brand{font-family:'Caveat Brush',cursive; font-size:30px; line-height:1; white-space:nowrap}
+.brand span{color:var(--accent)}
+nav.tabs{display:flex; gap:6px; margin-left:auto}
+nav.tabs button, nav.bottom button{
+  border:0; background:transparent; padding:9px 14px; border-radius:999px; cursor:pointer;
+  font-weight:700; color:var(--muted); position:relative;
+}
+nav.tabs button.on{background:var(--ink); color:var(--bg)}
+.who{font-size:13px; color:var(--muted); white-space:nowrap}
+.who b{color:var(--ink)}
+.dotbadge{position:absolute; top:2px; right:4px; min-width:18px; height:18px; padding:0 5px; border-radius:9px; background:var(--accent); color:#fff; font-size:11px; line-height:18px; text-align:center}
+.dotbadge:empty{display:none}
+nav.bottom{display:none}
+
+main{max-width:1240px; margin:0 auto; padding:8px 20px 40px}
+section.view{display:none}
+section.view.on{display:block}
+
+/* ---------- panels & controls ---------- */
+.panel{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); margin-bottom:14px}
+.panel.pad{padding:18px}
+details.panel > summary{
+  list-style:none; cursor:pointer; padding:14px 18px; font-weight:800; font-size:16px; display:flex; align-items:center; gap:8px;
+}
+details.panel > summary::-webkit-details-marker{display:none}
+details.panel > summary::after{content:'▾'; margin-left:auto; color:var(--muted); transition:transform .2s}
+details.panel:not([open]) > summary::after{transform:rotate(-90deg)}
+.pbody{padding:0 18px 18px; display:grid; gap:12px}
+label{display:grid; gap:5px; font-weight:700; font-size:13px}
+label small{font-weight:400}
+input[type=text],input[type=url],input[type=password],input[type=number],input[type=date],select,textarea{
+  width:100%; border:1.5px solid var(--line); background:var(--bg); border-radius:12px; padding:10px 12px; font-weight:600; outline:none;
+}
+input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+textarea{resize:vertical; min-height:64px}
+.row{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+.cols2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+.cols3{display:grid; grid-template-columns:repeat(3,1fr); gap:10px}
+input[type=range]{width:100%; accent-color:var(--accent)}
+.rng span{display:flex; justify-content:space-between}
+.rng output{color:var(--muted); font-weight:600}
+.check{display:flex; align-items:center; gap:8px; font-weight:700; cursor:pointer}
+.check input{width:18px; height:18px; accent-color:var(--accent)}
+
+.seg{display:flex; flex-wrap:wrap; gap:6px}
+.seg button{
+  border:1.5px solid var(--line); background:var(--bg); border-radius:999px; padding:7px 12px; cursor:pointer; font-weight:700; font-size:13px;
+}
+.seg button.on{border-color:var(--accent); background:var(--soft); color:var(--accent)}
+.seg.shapes button{padding:6px; border-radius:12px; display:grid; gap:2px; justify-items:center; font-size:11px; width:74px}
+.seg.shapes svg{width:58px; height:29px}
+
+.colors{display:grid; grid-template-columns:repeat(auto-fill,minmax(92px,1fr)); gap:10px}
+.colors label{justify-items:center; text-align:center; font-size:12px}
+input[type=color]{width:44px; height:44px; border:2px solid var(--line); border-radius:50%; padding:0; background:none; cursor:pointer; overflow:hidden}
+input[type=color]::-webkit-color-swatch-wrapper{padding:0}
+input[type=color]::-webkit-color-swatch{border:0; border-radius:50%}
+input[type=color]::-moz-color-swatch{border:0; border-radius:50%}
+
+.palettes{display:flex; flex-wrap:wrap; gap:8px}
+.palettes button{border:1.5px solid var(--line); background:var(--bg); border-radius:999px; padding:5px 10px 5px 6px; cursor:pointer; display:flex; align-items:center; gap:6px; font-size:12px; font-weight:700}
+.palettes i{display:flex}
+.palettes i b{width:14px; height:14px; border-radius:50%; margin-left:-4px; border:1.5px solid rgba(0,0,0,.08)}
+.palettes i b:first-child{margin-left:0}
+
+.emojis{display:grid; grid-template-columns:repeat(auto-fill,minmax(40px,1fr)); gap:4px; max-height:170px; overflow:auto; padding:2px}
+.emojis button{border:0; background:var(--bg); border-radius:10px; font-size:22px; height:40px; cursor:pointer}
+.emojis button:hover{background:var(--soft)}
+
+.btn{
+  border:1.5px solid var(--line); background:var(--panel); border-radius:999px; padding:10px 16px; cursor:pointer; font-weight:800; display:inline-flex; align-items:center; gap:6px; justify-content:center;
+}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.btn.primary:hover{filter:brightness(1.05)}
+.btn.dark{background:var(--ink); border-color:var(--ink); color:var(--bg)}
+.btn.danger{color:#d32f2f}
+.btn.big{padding:14px 22px; font-size:17px; width:100%}
+.btn:disabled{opacity:.55; cursor:not-allowed}
+.btn.sm{padding:6px 11px; font-size:13px}
+
+/* ---------- create view ---------- */
+.create-grid{display:grid; grid-template-columns:minmax(0,1.1fr) minmax(330px,.9fr); gap:24px; align-items:start}
+.preview-col{align-self:stretch}
+.preview-sticky{position:sticky; top:12px}
+.stage{
+  background:
+    radial-gradient(circle at 20% 20%, rgba(224,69,123,.08), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255,179,71,.12), transparent 40%),
+    var(--panel);
+  border:1px solid var(--line); border-radius:24px; padding:34px 30px; box-shadow:var(--shadow);
+}
+.stage .coupon{max-width:620px; margin:0 auto}
+.preview-actions{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+.preview-actions .btn.primary{margin-left:auto}
+.edit-banner{margin-top:10px; padding:10px 14px; border-radius:12px; background:var(--soft); color:var(--accent); font-weight:700; display:flex; gap:10px; align-items:center}
+.edit-banner[hidden]{display:none}
+.tpl-row{display:flex; gap:14px; overflow-x:auto; padding:6px 2px 12px; scroll-snap-type:x mandatory}
+.tpl-row button{all:unset; cursor:pointer; flex:0 0 170px; scroll-snap-align:start; text-align:center; font-size:12px; font-weight:700; color:var(--muted)}
+.tpl-row button .coupon{margin-bottom:6px; transition:transform .15s}
+.tpl-row button:hover .coupon{transform:rotate(-2deg) scale(1.03)}
+.hint{font-size:12px; color:var(--muted); font-weight:400}
+.img-row{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+.img-row img{width:40px; height:40px; object-fit:contain; border-radius:8px; background:var(--bg)}
+
+/* ---------- coupon grids ---------- */
+.toolbar{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:6px 0 18px}
+.toolbar h2{font-family:'Caveat Brush',cursive; font-size:32px; font-weight:400; margin-right:auto}
+.grid{display:grid; gap:26px 20px; grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.card{all:unset; cursor:pointer; display:block; border-radius:14px}
+.card:focus-visible{outline:3px solid var(--accent); outline-offset:6px}
+.card .coupon{transition:transform .18s}
+.card:hover .coupon{transform:translateY(-3px) rotate(-.6deg)}
+.card-meta{display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin-top:10px; font-size:12.5px; color:var(--muted); font-weight:600}
+.pill{display:inline-block; padding:2px 9px; border-radius:999px; background:var(--line); color:var(--ink); font-size:11.5px; font-weight:800}
+.pill.new{background:var(--accent); color:#fff}
+.pill.ok{background:#d9f2df; color:#1b5e20}
+.pill.used{background:#eee; color:#777}
+.pill.exp{background:#ffe0cc; color:#a14400}
+.empty{text-align:center; padding:50px 20px; color:var(--muted)}
+.empty .big{font-size:48px}
+.drafts-grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); padding:0 18px 18px}
+.draft{display:grid; gap:6px}
+.draft .row{justify-content:center}
+
+/* ---------- THE COUPON ---------- */
+.coupon{
+  position:relative; width:100%; aspect-ratio:2/1; container-type:inline-size;
+  filter:drop-shadow(0 4px 7px rgba(60,30,50,.2)); user-select:none; -webkit-user-select:none;
+}
+.coupon > svg.c-bg{position:absolute; inset:0; width:100%; height:100%; overflow:visible; display:block}
+.c-text{position:absolute; display:flex; flex-direction:column; justify-content:center; overflow:hidden}
+.c-inner{width:100%}
+.c-title{line-height:.98; overflow-wrap:normal}
+.c-title mark{color:inherit; padding:0 .16em; border-radius:.45em; -webkit-box-decoration-break:clone; box-decoration-break:clone}
+.c-title u{text-decoration-thickness:.07em; text-underline-offset:.12em}
+.c-sub{line-height:1.05; margin-top:.9cqw}
+.c-fine{line-height:1.1; margin-top:.9cqw; letter-spacing:.08em}
+.c-topicon{line-height:1; margin-bottom:.6cqw}
+.c-icon{position:absolute; line-height:1; pointer-events:none; filter:drop-shadow(0 .35cqw 0 rgba(0,0,0,.12))}
+.c-icon img,.c-topicon img{width:1em; height:1em; object-fit:contain; display:inline-block; vertical-align:middle; border-radius:.12em}
+.c-stub{position:absolute; display:flex; align-items:center; justify-content:center; writing-mode:vertical-rl; transform:rotate(180deg); letter-spacing:.35cqw; line-height:1; white-space:nowrap; overflow:hidden}
+.c-badge{position:absolute; top:-7px; left:-7px; background:var(--ink); color:var(--bg); border-radius:999px; padding:2px 8px; font:800 12px 'Nunito',sans-serif; z-index:2}
+.c-stamp{position:absolute; inset:0; display:grid; place-items:center; pointer-events:none}
+.c-stamp span{
+  font-family:'Permanent Marker',cursive; font-size:10cqw; color:#d32f2f; border:.9cqw solid #d32f2f; border-radius:2cqw;
+  padding:0 3cqw; transform:rotate(-14deg); opacity:.88; background:rgba(255,255,255,.45); letter-spacing:.3cqw;
+}
+.c-stamp.exp span{color:#b85c00; border-color:#b85c00}
+.coupon.is-used > svg.c-bg,.coupon.is-used .c-text,.coupon.is-used .c-icon{filter:saturate(.35) opacity(.8)}
+.coupon.just-used .c-stamp span{animation:stampIn .55s cubic-bezier(.2,1.6,.4,1)}
+@keyframes stampIn{from{transform:rotate(-14deg) scale(2.6); opacity:0}}
+
+/* ---------- modal ---------- */
+dialog#modal, dialog#keyModal{
+  border:0; padding:0; border-radius:24px; background:var(--panel); color:var(--ink);
+  width:min(640px, calc(100vw - 24px)); max-height:calc(100dvh - 24px); box-shadow:0 20px 60px rgba(0,0,0,.35);
+}
+dialog#modal::backdrop, dialog#keyModal::backdrop{background:rgba(30,20,35,.55); backdrop-filter:blur(3px)}
+.modal-wrap{padding:26px 24px 22px; display:grid; gap:16px; overflow:auto}
+.modal-close{position:absolute; top:10px; right:10px; border:0; background:var(--bg); width:36px; height:36px; border-radius:50%; font-size:18px; cursor:pointer; z-index:3}
+.modal-coupon{padding:10px 6px}
+.hist{font-size:13px; display:grid; gap:6px}
+.hist div{background:var(--bg); padding:8px 12px; border-radius:10px}
+
+/* ---------- toast & confetti ---------- */
+dialog#keyModal{width:min(420px, calc(100vw - 24px))}
+.key-form{padding:26px 22px 22px; display:grid; gap:12px}
+.key-form h2{font-family:'Caveat Brush',cursive; font-weight:400; font-size:30px}
+.pw{position:relative}
+.pw input{padding-right:48px}
+.pw button{position:absolute; right:6px; top:50%; transform:translateY(-50%); border:0; background:transparent; font-size:18px; cursor:pointer; padding:6px}
+#keyBtn{flex:0 0 auto}
+#keyBtn.warn{background:var(--accent); border-color:var(--accent); color:#fff; animation:pulse 1.6s infinite}
+@keyframes pulse{50%{transform:scale(1.08)}}
+#toast{position:fixed; left:50%; bottom:24px; transform:translate(-50%,120px); background:var(--ink); color:var(--bg); padding:12px 18px; border-radius:14px; font-weight:700; transition:transform .3s; z-index:1000; max-width:calc(100vw - 32px); text-align:center}
+#toast.on{transform:translate(-50%,0)}
+.confetti{position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:999}
+.confetti span{position:absolute; top:-40px; animation:fall 2.3s ease-in forwards}
+@keyframes fall{to{transform:translate(var(--dx),110vh) rotate(540deg)}}
+
+/* ---------- mobile ---------- */
+@media (max-width:820px){
+  header.top{padding:10px 16px}
+  .brand{font-size:26px}
+  nav.tabs{display:none}
+  .who{margin-left:auto}
+  main{padding:4px 16px calc(96px + env(safe-area-inset-bottom))}
+  nav.bottom{
+    display:grid; grid-template-columns:repeat(4,1fr); position:fixed; left:0; right:0; bottom:0; z-index:50;
+    background:var(--panel); border-top:1px solid var(--line); padding:6px 6px calc(6px + env(safe-area-inset-bottom));
+  }
+  nav.bottom button{display:grid; justify-items:center; gap:1px; font-size:11px; padding:6px 2px; border-radius:12px}
+  nav.bottom button b{font-size:21px; line-height:1.1}
+  nav.bottom button.on{color:var(--accent); background:var(--soft)}
+  .create-grid{grid-template-columns:1fr; gap:14px}
+  .preview-col{display:contents}
+  .preview-sticky{top:0; z-index:20; background:var(--bg); padding:6px 0 8px; margin:0 -16px; padding-left:16px; padding-right:16px}
+  .stage{padding:12px 14px; border-radius:18px}
+  .preview-actions{flex-wrap:nowrap; margin-top:8px}
+  .preview-actions .btn{padding:8px 12px; font-size:14px}
+  .preview-actions .lbl{display:none}
+  .preview-actions .btn.primary{flex:1}
+  .grid{grid-template-columns:1fr}
+  .cols3{grid-template-columns:1fr 1fr}
+}
+@media (max-width:420px){ .cols2{grid-template-columns:1fr} .who{display:none} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">Our <span>Coupon</span> Book</div>
+  <nav class="tabs" id="topNav">
+    <button data-tab="create" class="on">✏️ Create</button>
+    <button data-tab="received">🎁 Received <span class="dotbadge" data-badge></span></button>
+    <button data-tab="sent">💌 Sent</button>
+    <button data-tab="settings">⚙️ Settings</button>
+  </nav>
+  <div class="who" id="who">Not connected</div>
+  <button class="btn sm" id="keyBtn" title="Enter your secret key" aria-label="Enter your secret key">🔑</button>
+</header>
+
+<main>
+  <!-- ================= CREATE ================= -->
+  <section class="view on" id="view-create">
+    <div class="create-grid">
+      <div class="preview-col">
+        <div class="preview-sticky">
+          <div class="stage"><div id="preview"></div></div>
+          <div class="edit-banner" id="editBanner" hidden>
+            <span>✏️ Editing a coupon you already sent</span>
+            <button class="btn sm" id="cancelEdit" style="margin-left:auto">Cancel</button>
+          </div>
+          <div class="preview-actions">
+            <button class="btn" id="surprise" title="Random design" aria-label="Surprise me">🎲<span class="lbl"> Surprise me</span></button>
+            <button class="btn" id="resetBtn" aria-label="New coupon">↺<span class="lbl"> New</span></button>
+            <button class="btn" id="draftBtn" aria-label="Save draft">💾<span class="lbl"> Draft</span></button>
+            <button class="btn primary" id="sendBtn">Send 💌</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="controls">
+        <details class="panel" open>
+          <summary>✨ Start from an idea</summary>
+          <div class="pbody" style="padding-bottom:6px"><div class="tpl-row" id="templates"></div></div>
+        </details>
+
+        <details class="panel" open>
+          <summary>✏️ Words</summary>
+          <div class="pbody">
+            <label>Main text
+              <textarea data-f="title" rows="2" maxlength="120"></textarea>
+              <span class="hint">Tips: <b>*word*</b> highlights, <b>_word_</b> underlines, Enter = new line.</span>
+            </label>
+            <div class="cols2">
+              <label>Subtitle <input type="text" data-f="subtitle" maxlength="200" placeholder="valid for squabbles & scraps"></label>
+              <label>Fine print <input type="text" data-f="fine_print" maxlength="200" placeholder="(anywhere!)"></label>
+            </div>
+            <div class="cols2">
+              <label>Title font <select data-d="titleFont" id="titleFontSel"></select></label>
+              <label>Small text font <select data-d="bodyFont" id="bodyFontSel"></select></label>
+            </div>
+            <div class="cols3">
+              <label class="rng"><span>Title size <output data-o="titleSize"></output></span><input type="range" data-d="titleSize" min="4" max="22" step="0.5"></label>
+              <label class="rng"><span>Subtitle <output data-o="subSize"></output></span><input type="range" data-d="subSize" min="2.5" max="10" step="0.25"></label>
+              <label class="rng"><span>Fine print <output data-o="fineSize"></output></span><input type="range" data-d="fineSize" min="2" max="7" step="0.25"></label>
+            </div>
+            <div class="row">
+              <div class="seg" data-d="align">
+                <button data-v="left">⟸ Left</button><button data-v="center">Center</button><button data-v="right">Right ⟹</button>
+              </div>
+              <label class="check"><input type="checkbox" data-d="upper"> ALL CAPS</label>
+            </div>
+            <label>Title effect
+              <div class="seg" data-d="shadow">
+                <button data-v="none">None</button><button data-v="soft">Soft shadow</button><button data-v="pop">Pop</button><button data-v="outline">Outline</button>
+              </div>
+            </label>
+          </div>
+        </details>
+
+        <details class="panel">
+          <summary>🎨 Colors</summary>
+          <div class="pbody">
+            <div class="palettes" id="palettes"></div>
+            <div class="colors">
+              <label>Background<input type="color" data-d="bg"></label>
+              <label>Border<input type="color" data-d="border"></label>
+              <label>Inner frame<input type="color" data-d="frameColor"></label>
+              <label>Title<input type="color" data-d="titleColor"></label>
+              <label>Small text<input type="color" data-d="textColor"></label>
+              <label>Highlight<input type="color" data-d="hlColor"></label>
+              <label>Pattern<input type="color" data-d="patternColor"></label>
+            </div>
+          </div>
+        </details>
+
+        <details class="panel">
+          <summary>🎟️ Shape & border</summary>
+          <div class="pbody">
+            <div class="seg shapes" data-d="shape" id="shapeSeg"></div>
+            <div class="cols3">
+              <label class="rng"><span>Corners <output data-o="radius"></output></span><input type="range" data-d="radius" min="4" max="40" step="1"></label>
+              <label class="rng"><span>Border <output data-o="borderW"></output></span><input type="range" data-d="borderW" min="0" max="26" step="1"></label>
+              <label class="rng"><span>Frame gap <output data-o="frameInset"></output></span><input type="range" data-d="frameInset" min="2" max="30" step="1"></label>
+            </div>
+            <label>Inner frame
+              <div class="seg" data-d="frame">
+                <button data-v="none">None</button><button data-v="solid">Solid</button><button data-v="dashed">Dashed</button><button data-v="dotted">Dotted</button><button data-v="double">Double</button>
+              </div>
+            </label>
+            <label class="rng"><span>Frame thickness <output data-o="frameW"></output></span><input type="range" data-d="frameW" min="1" max="8" step="0.5"></label>
+            <div class="row">
+              <label class="check"><input type="checkbox" data-d="stub"> Tear-off stub</label>
+              <input type="text" data-d="stubText" maxlength="24" placeholder="ADMIT ONE" style="flex:1; min-width:140px">
+            </div>
+          </div>
+        </details>
+
+        <details class="panel">
+          <summary>🌈 Background pattern</summary>
+          <div class="pbody">
+            <div class="seg" data-d="pattern" id="patternSeg"></div>
+            <label class="rng"><span>Pattern strength <output data-o="patternOpacity"></output></span><input type="range" data-d="patternOpacity" min="0" max="1" step="0.05"></label>
+          </div>
+        </details>
+
+        <details class="panel">
+          <summary>😍 Stickers</summary>
+          <div class="pbody">
+            <label>Where
+              <div class="seg" data-d="iconPos">
+                <button data-v="none">None</button><button data-v="left">Left</button><button data-v="right">Right</button><button data-v="both">Both sides</button><button data-v="top">Above text</button><button data-v="corner">Peeking corner</button>
+              </div>
+            </label>
+            <div class="cols2">
+              <label>Main sticker <input type="text" data-d="icon" maxlength="16"></label>
+              <label>Right-side sticker <small>(for "Both sides")</small><input type="text" data-d="icon2" maxlength="16" placeholder="same as main"></label>
+            </div>
+            <div class="row">
+              <span class="hint">Tap an emoji to use it as the</span>
+              <div class="seg" id="emojiTarget"><button data-v="icon" class="on">main</button><button data-v="icon2">right-side</button></div>
+              <span class="hint">sticker</span>
+            </div>
+            <div class="emojis" id="emojis"></div>
+            <div class="img-row">
+              <label class="btn sm" style="display:inline-flex">📷 Use my own picture<input type="file" accept="image/*" id="imgInput" hidden></label>
+              <img id="imgPreview" alt="" hidden>
+              <button class="btn sm" id="imgRemove" hidden>Remove picture</button>
+              <span class="hint">Tiny images work best (it gets shrunk to fit).</span>
+            </div>
+            <div class="cols2">
+              <label class="rng"><span>Sticker size <output data-o="iconSize"></output></span><input type="range" data-d="iconSize" min="6" max="32" step="0.5"></label>
+              <label class="rng"><span>Tilt <output data-o="iconRot"></output></span><input type="range" data-d="iconRot" min="-45" max="45" step="1"></label>
+            </div>
+          </div>
+        </details>
+
+        <details class="panel">
+          <summary>🗓️ Rules</summary>
+          <div class="pbody">
+            <div class="cols2">
+              <label>How many times can it be used? <input type="number" data-f="uses_total" min="1" max="99"></label>
+              <label>Expires on <small>(optional)</small><input type="date" data-f="expires_at"></label>
+            </div>
+          </div>
+        </details>
+
+        <details class="panel" id="draftsPanel">
+          <summary>📝 Drafts on this device <span class="pill" id="draftCount">0</span></summary>
+          <div class="drafts-grid" id="drafts"></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RECEIVED ================= -->
+  <section class="view" id="view-received">
+    <div class="toolbar">
+      <h2 id="recvTitle">Coupons for you</h2>
+      <div class="seg" id="recvFilter">
+        <button data-v="available" class="on">Ready to use</button><button data-v="used">Used</button><button data-v="all">All</button>
+      </div>
+      <button class="btn sm" data-refresh>↻ Refresh</button>
+    </div>
+    <div class="grid" id="receivedGrid"></div>
+  </section>
+
+  <!-- ================= SENT ================= -->
+  <section class="view" id="view-sent">
+    <div class="toolbar">
+      <h2 id="sentTitle">Coupons you gave</h2>
+      <div class="seg" id="sentFilter">
+        <button data-v="all" class="on">All</button><button data-v="available">Not used yet</button><button data-v="used">Used</button>
+      </div>
+      <button class="btn sm" data-refresh>↻ Refresh</button>
+    </div>
+    <div class="grid" id="sentGrid"></div>
+  </section>
+
+  <!-- ================= SETTINGS ================= -->
+  <section class="view" id="view-settings">
+    <div style="max-width:640px">
+      <div class="panel pad" style="display:grid; gap:12px">
+        <h2>🔌 Connection</h2>
+        <label>Server URL <input type="url" id="cfgUrl" placeholder="https://coupons-api.yourname.workers.dev" autocomplete="off"></label>
+        <label>Your secret key <input type="password" id="cfgToken" placeholder="the TOKEN_A or TOKEN_B you set on the server" autocomplete="off"></label>
+        <div class="row">
+          <button class="btn dark" id="cfgSave">Save & connect</button>
+          <span id="cfgStatus" class="muted"></span>
+        </div>
+        <p class="hint" style="margin:0">Each person uses their own key. The server decides who is A and who is B from the key — coupons you send always go to the other person.</p>
+      </div>
+      <div class="panel pad" style="display:grid; gap:12px">
+        <h2>🙋 Your name</h2>
+        <div class="row">
+          <input type="text" id="myName" maxlength="40" placeholder="How your partner sees you" style="flex:1; min-width:180px">
+          <button class="btn" id="nameSave">Save name</button>
+        </div>
+      </div>
+      <div class="panel pad" style="display:grid; gap:12px">
+        <h2>📱 Set up another device</h2>
+        <p class="hint" style="margin:0">Copies a link with your server and key built in. Open it on your phone and you're connected. It contains your secret key, so only send it to yourself.</p>
+        <div class="row"><button class="btn" id="copyLink">🔗 Copy setup link</button></div>
+      </div>
+      <div class="panel pad" style="display:grid; gap:12px">
+        <h2>🧽 This device</h2>
+        <div class="row"><button class="btn danger" id="forget">Disconnect & forget key</button></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<nav class="bottom" id="bottomNav">
+  <button data-tab="create" class="on"><b>✏️</b>Create</button>
+  <button data-tab="received"><b>🎁</b>Received<span class="dotbadge" data-badge></span></button>
+  <button data-tab="sent"><b>💌</b>Sent</button>
+  <button data-tab="settings"><b>⚙️</b>Settings</button>
+</nav>
+
+<dialog id="modal"><button class="modal-close" id="modalClose" aria-label="Close">✕</button><div class="modal-wrap" id="modalBody"></div></dialog>
+<dialog id="keyModal">
+  <button class="modal-close" id="keyClose" aria-label="Close">✕</button>
+  <form class="key-form" id="keyForm" method="dialog">
+    <h2>🔑 Your secret key</h2>
+    <p class="hint" style="margin:0">Paste the key you were given (TOKEN_A or TOKEN_B). It stays on this device only.</p>
+    <label>Secret key
+      <div class="pw"><input type="password" id="keyToken" autocomplete="off" required placeholder="paste your key here"><button type="button" id="keyShow" aria-label="Show key">👁️</button></div>
+    </label>
+    <details>
+      <summary class="hint" style="cursor:pointer">Server address</summary>
+      <input type="url" id="keyUrl" style="margin-top:8px" placeholder="https://coupons-worker.yourname.workers.dev">
+    </details>
+    <button class="btn primary big" id="keySave" type="submit">Save & connect</button>
+    <div id="keyStatus" class="hint" style="text-align:center; min-height:1.2em"></div>
+  </form>
+</dialog>
+<div id="toast"></div>
+
+<script>
+'use strict';
+/* =====================================================================
+   Helpers
+   ===================================================================== */
+const $  = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const clone = o => JSON.parse(JSON.stringify(o));
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const store = {
+  mem: {},
+  get(k, def) { try { const v = localStorage.getItem(k); return v == null ? (k in this.mem ? this.mem[k] : def) : JSON.parse(v); } catch { return k in this.mem ? this.mem[k] : def; } },
+  set(k, v) { this.mem[k] = v; try { localStorage.setItem(k, JSON.stringify(v)); } catch {} },
+  del(k) { delete this.mem[k]; try { localStorage.removeItem(k); } catch {} },
+};
+let toastT;
+function toast(msg, ms = 2600) {
+  const t = $('#toast'), m = $('#modal'), k = $('#keyModal'); (k.open ? k : m.open ? m : document.body).append(t);
+  t.textContent = msg; t.classList.add('on');
+  clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), ms);
+}
+function confetti() {
+  const host = $('#modal').open ? $('#modal') : document.body;
+  const w = document.createElement('div'); w.className = 'confetti';
+  const items = ['🎉','✨','💖','🎊','💫','⭐','💕'];
+  for (let i = 0; i < 30; i++) {
+    const s = document.createElement('span'); s.textContent = pick(items);
+    s.style.left = Math.random() * 100 + '%'; s.style.fontSize = 16 + Math.random() * 18 + 'px';
+    s.style.animationDelay = Math.random() * .5 + 's'; s.style.setProperty('--dx', (Math.random() * 200 - 100) + 'px');
+    w.append(s);
+  }
+  host.append(w); setTimeout(() => w.remove(), 3000);
+}
+const todayISO = () => new Date().toLocaleDateString('en-CA');
+function fmtDate(s) {
+  if (!s) return '';
+  const d = /^\d{4}-\d{2}-\d{2}$/.test(s) ? new Date(+s.slice(0,4), +s.slice(5,7) - 1, +s.slice(8,10)) : new Date(s);
+  return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+}
+function mulberry(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function hash(s) { let h = 2166136261; for (const c of String(s)) h = Math.imul(h ^ c.charCodeAt(0), 16777619); return h >>> 0; }
+
+/* =====================================================================
+   Design model
+   ===================================================================== */
+const FONTS = ['Gochi Hand','Caveat Brush','Patrick Hand','Amatic SC','Londrina Solid','Permanent Marker','Pacifico','Fredoka','Kalam','Chewy','Shadows Into Light Two','Nunito'];
+const SHAPES = [['notch','Notched'],['rounded','Rounded'],['ticket','Ticket'],['cut','Cut corners'],['scallop','Scallop'],['stamp','Stamp'],['rect','Square']];
+const PATTERNS = [['none','None'],['rays','☀️ Rays'],['stripes','Stripes'],['dots','Dots'],['checks','Gingham'],['hearts','♥ Hearts'],['waves','Waves'],['grid','Grid'],['confetti','🎊 Confetti'],['band','Bottom band'],['beads','Bead edge']];
+const EMOJIS = '🤗 💞 💋 💖 💘 😘 🥰 🕯️ 🍝 🍷 🥂 🦶 💆 🛁 🧹 🧺 📺 🎮 🌟 ✨ 🏆 🎬 🍿 🎟️ 🃏 🦁 🥞 ☕ 😴 🌹 💐 🍫 🍦 🎂 🎁 🎉 🙌 💃 🕺 🎶 🎤 🚗 ✈️ 🏖️ ⛺ 🌙 ☀️ 🌈 🐶 🐱 🐻 🦊 🐼 🍕 🍔 🌮 🍣 🍓 👑 💌 🔥 ❤️ 🧸 📚 🧁 🪴 🧘 🚲 🎨'.split(' ');
+
+const DEF = {
+  shape:'notch', radius:22, borderW:10, frame:'solid', frameW:3, frameInset:8,
+  bg:'#fde7ef', border:'#7b1e5a', frameColor:'#7b1e5a',
+  pattern:'none', patternColor:'#ffffff', patternOpacity:.45,
+  titleFont:'Gochi Hand', bodyFont:'Patrick Hand', titleColor:'#7b2a8f', textColor:'#5a2750', hlColor:'#ffcc80',
+  titleSize:12, subSize:5, fineSize:3.6, align:'center', upper:false, shadow:'none',
+  icon:'💝', icon2:'', iconImg:'', iconPos:'left', iconSize:16, iconRot:-10,
+  stub:false, stubText:'ADMIT ONE',
+};
+const LIM = { radius:[4,40], borderW:[0,26], frameW:[1,8], frameInset:[2,30], patternOpacity:[0,1], titleSize:[4,22], subSize:[2.5,10], fineSize:[2,7], iconSize:[6,32], iconRot:[-45,45] };
+const ENUMS = {
+  shape: SHAPES.map(s => s[0]), frame:['none','solid','dashed','dotted','double'], pattern: PATTERNS.map(p => p[0]),
+  titleFont: FONTS, bodyFont: FONTS, align:['left','center','right'], shadow:['none','soft','pop','outline'],
+  iconPos:['none','left','right','both','top','corner'],
+};
+const COLORS = ['bg','border','frameColor','patternColor','titleColor','textColor','hlColor'];
+
+// Everything coming from the server (partner-made) passes through here: whitelists, clamps and regexes only.
+function sanitizeDesign(d) {
+  d = d && typeof d === 'object' ? d : {};
+  const o = {};
+  for (const [k, def] of Object.entries(DEF)) {
+    const v = d[k];
+    if (COLORS.includes(k)) o[k] = /^#[0-9a-f]{6}$/i.test(v) ? v : def;
+    else if (ENUMS[k]) o[k] = ENUMS[k].includes(v) ? v : def;
+    else if (typeof def === 'number') { const n = Number(v); o[k] = Number.isFinite(n) ? Math.min(LIM[k][1], Math.max(LIM[k][0], n)) : def; }
+    else if (typeof def === 'boolean') o[k] = typeof v === 'boolean' ? v : def;
+    else if (k === 'iconImg') o[k] = typeof v === 'string' && v.length < 14000 && /^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/.test(v) ? v : '';
+    else o[k] = typeof v === 'string' ? v.slice(0, 24) : def;
+  }
+  return o;
+}
+
+const PALETTES = [
+  ['Bubblegum', {bg:'#f8c8dc',border:'#8e1f5e',frameColor:'#8e1f5e',titleColor:'#8e24aa',textColor:'#6a1b4d',hlColor:'#ffe082',patternColor:'#ffffff'}],
+  ['Mint',      {bg:'#c8ecd9',border:'#2e7d32',frameColor:'#2e7d32',titleColor:'#1b5e20',textColor:'#2e7d32',hlColor:'#fff59d',patternColor:'#ffffff'}],
+  ['Lemon',     {bg:'#fff59d',border:'#7b1e5a',frameColor:'#26a69a',titleColor:'#00897b',textColor:'#7b1e5a',hlColor:'#ffab91',patternColor:'#ffffff'}],
+  ['Sky',       {bg:'#d6ecfb',border:'#1f6fd1',frameColor:'#e53935',titleColor:'#1f6fd1',textColor:'#b71c1c',hlColor:'#ffe082',patternColor:'#ffffff'}],
+  ['Lavender',  {bg:'#dccdf5',border:'#f57c00',frameColor:'#5e35b1',titleColor:'#4527a0',textColor:'#5e35b1',hlColor:'#ffcc80',patternColor:'#ffffff'}],
+  ['Peach',     {bg:'#ffd8b8',border:'#c2185b',frameColor:'#c2185b',titleColor:'#ad1457',textColor:'#6d4c41',hlColor:'#fff176',patternColor:'#ffffff'}],
+  ['Cherry',    {bg:'#ffffff',border:'#d32f2f',frameColor:'#d32f2f',titleColor:'#d32f2f',textColor:'#37474f',hlColor:'#ffcdd2',patternColor:'#ffcdd2'}],
+  ['Forest',    {bg:'#e8f0d8',border:'#33691e',frameColor:'#8d6e63',titleColor:'#33691e',textColor:'#5d4037',hlColor:'#ffe082',patternColor:'#c5e1a5'}],
+  ['Midnight',  {bg:'#1f2a4d',border:'#ffd54f',frameColor:'#ffd54f',titleColor:'#ffd54f',textColor:'#e3e8ff',hlColor:'#7c4dff',patternColor:'#ffffff'}],
+  ['Kraft',     {bg:'#e6cfa7',border:'#5d4037',frameColor:'#5d4037',titleColor:'#3e2723',textColor:'#5d4037',hlColor:'#ffffff',patternColor:'#fff8e1'}],
+];
+
+const PRESETS = [
+  {name:'Tight hug', title:'_One_ tight\nHUG!', design:{shape:'notch', bg:'#f8c8dc', border:'#8e1f5e', frame:'none', pattern:'rays', patternColor:'#ffffff', patternOpacity:.45, titleFont:'Gochi Hand', titleColor:'#8e24aa', titleSize:15, icon:'🤗', icon2:'💞', iconPos:'both', iconSize:15, iconRot:-12}},
+  {name:'Smooch', title:'one\nSMOOCH!', fine_print:'(anywhere!)', design:{shape:'notch', bg:'#c5e6b8', border:'#3f7d3a', frameColor:'#3f7d3a', titleFont:'Londrina Solid', bodyFont:'Patrick Hand', titleColor:'#7b1e3c', textColor:'#7b1e3c', icon:'💋', iconPos:'left', iconSize:20, iconRot:-8, titleSize:14}},
+  {name:'Candlelit dinner', title:'CANDLELIT\nDINNER', fine_print:'(admit 2)', design:{shape:'rounded', radius:18, bg:'#ffffff', border:'#1f6fd1', frameColor:'#e53935', pattern:'band', patternColor:'#cfe6fb', patternOpacity:1, titleFont:'Patrick Hand', titleColor:'#3d9be9', textColor:'#b71c1c', icon:'🕯️', iconPos:'both', iconSize:15, iconRot:0}},
+  {name:'Foot massage', title:'One\nrelaxing\nfoot massage', design:{shape:'notch', bg:'#fff59d', border:'#7b1e5a', frame:'none', titleFont:'Caveat Brush', titleColor:'#26a69a', titleSize:12, align:'left', icon:'🦶', iconPos:'corner', iconSize:20, iconRot:12}},
+  {name:'No chores', title:'one day\n*WITHOUT* CHORES!', design:{shape:'notch', borderW:16, bg:'#ffffff', border:'#43a047', frame:'dashed', frameColor:'#2e7d32', titleFont:'Gochi Hand', titleColor:'#e53935', hlColor:'#ffcc80', titleSize:12, icon:'🧹', iconPos:'corner', iconSize:17, iconRot:15}},
+  {name:'TV remote', title:'TV remote\nIS YOURS.', design:{shape:'cut', radius:20, bg:'#d7c8f3', border:'#f57c00', frameColor:'#5e35b1', frameW:4, titleFont:'Patrick Hand', titleColor:'#4527a0', titleSize:14, icon:'📺', iconPos:'right', iconSize:16, iconRot:8}},
+  {name:'Compliment', title:'One unbelievably\n_Awesome_ fantastic\ncompliment.', design:{shape:'rounded', radius:24, bg:'#f8d7e6', border:'#2a9d8f', frameColor:'#1d3f8f', titleFont:'Kalam', titleColor:'#1d3f8f', titleSize:8.5, icon:'🌟', iconPos:'corner', iconSize:15, iconRot:10}},
+  {name:'You win', title:'YOU _WIN_', subtitle:'(valid for squabbles & scraps)', design:{shape:'stamp', radius:14, bg:'#d9c3ec', border:'#6a1b9a', frame:'none', pattern:'beads', patternColor:'#e91e63', patternOpacity:.9, titleFont:'Patrick Hand', bodyFont:'Patrick Hand', titleColor:'#6a1b4d', textColor:'#6a1b4d', titleSize:15, subSize:5, icon:'🏆', iconPos:'right', iconSize:15, iconRot:8}},
+  {name:'Movie pick', title:'MOVIE PICK\nof your choice!', fine_print:'(anything! yes!)', design:{shape:'ticket', radius:26, bg:'#cfe8fa', border:'#f08a24', frameColor:'#8e1f45', titleFont:'Amatic SC', bodyFont:'Patrick Hand', titleColor:'#8e1f45', textColor:'#8e1f45', titleSize:13, stub:true, stubText:'ADMIT ONE', icon:'🎬', iconPos:'top', iconSize:11, iconRot:0}},
+  {name:'Wild card', title:'WILD\nCARD.', fine_print:'(anything, anytime, anywhere.)', design:{shape:'notch', bg:'#cde8b5', border:'#33691e', frame:'none', pattern:'confetti', patternColor:'#ffffff', patternOpacity:.75, titleFont:'Londrina Solid', titleColor:'#558b2f', textColor:'#2e9e8f', titleSize:17, align:'left', icon:'🦁', iconPos:'corner', iconSize:24, iconRot:-8}},
+  {name:'Breakfast in bed', title:'BREAKFAST\nin bed', fine_print:'(pancakes included)', design:{shape:'rounded', bg:'#ffe0b2', border:'#bf360c', frameColor:'#bf360c', frame:'dotted', pattern:'checks', patternColor:'#ffffff', patternOpacity:.55, titleFont:'Chewy', titleColor:'#bf360c', textColor:'#6d4c41', titleSize:13, icon:'🥞', iconPos:'left', iconSize:18}},
+  {name:'Nap pass', title:'NAP PASS', subtitle:'no questions asked', design:{shape:'scallop', radius:18, bg:'#1f2a4d', border:'#ffd54f', frameColor:'#ffd54f', frame:'dotted', pattern:'dots', patternColor:'#ffffff', patternOpacity:.15, titleFont:'Fredoka', bodyFont:'Fredoka', titleColor:'#ffd54f', textColor:'#e3e8ff', titleSize:14, icon:'😴', iconPos:'corner', iconSize:18, iconRot:10}},
+  {name:'Yes day', title:'*YES* DAY!', subtitle:'I say yes to everything (almost)', design:{shape:'ticket', radius:24, bg:'#fff1f5', border:'#e91e63', frameColor:'#e91e63', pattern:'stripes', patternColor:'#ffc1d6', patternOpacity:.6, titleFont:'Permanent Marker', bodyFont:'Patrick Hand', titleColor:'#e91e63', textColor:'#ad1457', hlColor:'#fff176', titleSize:13, subSize:4.5, icon:'🙌', icon2:'🎉', iconPos:'both', iconSize:14}},
+  {name:'Slow dance', title:'One slow dance', subtitle:'in the kitchen', design:{shape:'notch', bg:'#e0f7fa', border:'#00838f', frameColor:'#00838f', pattern:'waves', patternColor:'#80deea', patternOpacity:.6, titleFont:'Pacifico', bodyFont:'Patrick Hand', titleColor:'#006064', textColor:'#00838f', titleSize:10, icon:'💃', icon2:'🕺', iconPos:'both', iconSize:14, iconRot:0}},
+];
+
+function blankCoupon() { return { title:'Your *coupon* here', subtitle:'', fine_print:'(valid anytime)', uses_total:1, expires_at:'', design:clone(DEF) }; }
+function fromPreset(p) { return { title:p.title, subtitle:p.subtitle || '', fine_print:p.fine_print || '', uses_total:1, expires_at:'', design:{ ...clone(DEF), ...clone(p.design) } }; }
+
+/* =====================================================================
+   Coupon renderer (SVG body + HTML text on top, scales with cqw units)
+   ===================================================================== */
+const DEFAULT_URL = 'https://coupons-worker.juggbar12.workers.dev';
+const W = 400, H = 200;
+let UID = 0;
+
+function shapePath(shape, x0, y0, x1, y1, r) {
+  r = Math.max(0, Math.min(r, (y1 - y0) / 2 - 2));
+  const my = (y0 + y1) / 2;
+  switch (shape) {
+    case 'rect': return `M${x0},${y0}H${x1}V${y1}H${x0}Z`;
+    case 'rounded':
+    case 'notch': {
+      const s = shape === 'rounded' ? 1 : 0;
+      return `M${x0+r},${y0}H${x1-r}A${r},${r} 0 0 ${s} ${x1},${y0+r}V${y1-r}A${r},${r} 0 0 ${s} ${x1-r},${y1}H${x0+r}A${r},${r} 0 0 ${s} ${x0},${y1-r}V${y0+r}A${r},${r} 0 0 ${s} ${x0+r},${y0}Z`;
+    }
+    case 'cut': return `M${x0+r},${y0}H${x1-r}L${x1},${y0+r}V${y1-r}L${x1-r},${y1}H${x0+r}L${x0},${y1-r}V${y0+r}Z`;
+    case 'ticket': {
+      const c = Math.max(3, r * .35), b = Math.min(r * .9, (y1 - y0) / 2 - c - 2);
+      return `M${x0+c},${y0}H${x1-c}A${c},${c} 0 0 1 ${x1},${y0+c}V${my-b}A${b},${b} 0 0 0 ${x1},${my+b}V${y1-c}A${c},${c} 0 0 1 ${x1-c},${y1}H${x0+c}A${c},${c} 0 0 1 ${x0},${y1-c}V${my+b}A${b},${b} 0 0 0 ${x0},${my-b}V${y0+c}A${c},${c} 0 0 1 ${x0+c},${y0}Z`;
+    }
+    case 'scallop':
+    case 'stamp': {
+      const sweep = shape === 'scallop' ? 1 : 0, seg = Math.max(10, r);
+      const nx = Math.max(3, Math.round((x1 - x0) / seg)), ny = Math.max(2, Math.round((y1 - y0) / seg));
+      const edge = (ax, ay, bx, by, n) => {
+        let p = ''; const rad = Math.hypot(bx - ax, by - ay) / n / 2;
+        for (let i = 1; i <= n; i++) p += `A${rad},${rad} 0 0 ${sweep} ${ax + (bx - ax) * i / n},${ay + (by - ay) * i / n}`;
+        return p;
+      };
+      return `M${x0},${y0}` + edge(x0,y0,x1,y0,nx) + edge(x1,y0,x1,y1,ny) + edge(x1,y1,x0,y1,nx) + edge(x0,y1,x0,y0,ny) + 'Z';
+    }
+  }
+  return shapePath('rect', x0, y0, x1, y1, r);
+}
+
+function patternSVG(d, id, box, seedText) {
+  const pc = d.patternColor, [x0, y0, x1, y1] = box;
+  const tile = (w, h, body, extra = '') => `<defs><pattern id="pt${id}" width="${w}" height="${h}" patternUnits="userSpaceOnUse" ${extra}>${body}</pattern></defs><rect x="0" y="0" width="${W}" height="${H}" fill="url(#pt${id})"/>`;
+  switch (d.pattern) {
+    case 'stripes': return tile(18, 18, `<rect width="9" height="18" fill="${pc}"/>`, 'patternTransform="rotate(40)"');
+    case 'dots':    return tile(20, 20, `<circle cx="5" cy="5" r="3" fill="${pc}"/><circle cx="15" cy="15" r="3" fill="${pc}"/>`);
+    case 'checks':  return tile(28, 28, `<rect width="14" height="28" fill="${pc}" opacity=".6"/><rect width="28" height="14" fill="${pc}" opacity=".6"/>`);
+    case 'hearts':  return tile(34, 30, `<path d="M10 17C3 12 2 8 5 5.5 7.5 3.5 10 5 10 7 10 5 12.5 3.5 15 5.5 18 8 17 12 10 17Z" fill="${pc}"/><path d="M27 32C20 27 19 23 22 20.5 24.5 18.5 27 20 27 22 27 20 29.5 18.5 32 20.5 35 23 34 27 27 32Z" fill="${pc}"/>`);
+    case 'waves':   return tile(40, 18, `<path d="M0 9Q10 1 20 9T40 9" fill="none" stroke="${pc}" stroke-width="3"/>`);
+    case 'grid':    return tile(18, 18, `<path d="M18 0H0V18" fill="none" stroke="${pc}" stroke-width="1.5"/>`);
+    case 'band':    return `<rect x="0" y="${y0 + (y1 - y0) * .62}" width="${W}" height="${H}" fill="${pc}"/>`;
+    case 'rays': {
+      let s = ''; const n = 22, cx = W / 2, cy = H / 2, R = 480;
+      for (let i = 0; i < n; i += 2) {
+        const a1 = i / n * Math.PI * 2, a2 = (i + 1) / n * Math.PI * 2;
+        s += `<path d="M${cx},${cy}L${cx + R * Math.cos(a1)},${cy + R * Math.sin(a1)}L${cx + R * Math.cos(a2)},${cy + R * Math.sin(a2)}Z" fill="${pc}"/>`;
+      }
+      return s;
+    }
+    case 'confetti': {
+      const rnd = mulberry(hash(seedText)); let s = '';
+      const cols = [pc, d.hlColor, d.border];
+      for (let i = 0; i < 46; i++) {
+        const x = x0 + rnd() * (x1 - x0), y = y0 + rnd() * (y1 - y0), c = cols[i % 3], rot = rnd() * 180 | 0;
+        s += rnd() < .5 ? `<rect x="${x}" y="${y}" width="9" height="4" rx="2" fill="${c}" transform="rotate(${rot} ${x} ${y})"/>` : `<circle cx="${x}" cy="${y}" r="${2 + rnd() * 2.5}" fill="${c}"/>`;
+      }
+      return s;
+    }
+    case 'beads': {
+      let s = ''; const r = 4.5, gap = 17, i0 = 8;
+      for (let x = x0 + i0 + 10; x < x1 - i0 - 6; x += gap) s += `<circle cx="${x}" cy="${y0 + i0}" r="${r}" fill="${pc}"/><circle cx="${x}" cy="${y1 - i0}" r="${r}" fill="${pc}"/>`;
+      return s;
+    }
+  }
+  return '';
+}
+
+function fmtTitle(s, hl) {
+  return esc(s).replace(/\*([^*\n]+)\*/g, `<mark style="background:${hl}">$1</mark>`).replace(/_([^_\n]+)_/g, '<u>$1</u>').replace(/\n/g, '<br>');
+}
+
+function couponStatus(c) {
+  if (c.uses_left === 0) return 'used';
+  if (c.expires_at && c.expires_at < todayISO()) return 'expired';
+  return 'available';
+}
+
+function renderCoupon(c, opts = {}) {
+  const d = sanitizeDesign(c.design);
+  const id = ++UID;
+  const scal = d.shape === 'scallop';
+  const pad = scal ? Math.max(10, d.radius) / 2 + 1 : 1.5;
+  const o = [pad, pad, W - pad, H - pad];
+  const bw = d.borderW;
+  const inr = [o[0] + bw, o[1] + bw, o[2] - bw, o[3] - bw];
+  const outerP = shapePath(d.shape, ...o, d.radius);
+  const innerP = shapePath(d.shape, ...inr, d.shape === 'rounded' ? Math.max(3, d.radius - bw * .6) : d.radius);
+  const fi = bw + d.frameInset + (d.shape === 'stamp' || scal ? d.radius * .3 : 0);
+  const fShape = (d.shape === 'scallop' || d.shape === 'stamp') ? 'rounded' : d.shape;
+  const fBox = [o[0] + fi, o[1] + fi, o[2] - fi, o[3] - fi];
+  const fr = d.shape === 'rounded' || fShape === 'rounded' ? Math.max(3, d.radius - fi * .5) : d.radius * .85;
+  let frame = '';
+  if (d.frame !== 'none') {
+    const fw = d.frameW;
+    const dash = d.frame === 'dashed' ? `stroke-dasharray="${fw * 3.2} ${fw * 2.2}"` : d.frame === 'dotted' ? `stroke-dasharray="0.1 ${fw * 2.4}" stroke-linecap="round"` : '';
+    if (d.frame === 'double') {
+      const g = fw * 1.6;
+      frame = `<path d="${shapePath(fShape, ...fBox, fr)}" fill="none" stroke="${d.frameColor}" stroke-width="${fw * .7}"/>` +
+              `<path d="${shapePath(fShape, fBox[0] + g, fBox[1] + g, fBox[2] - g, fBox[3] - g, Math.max(2, fr - g * .5))}" fill="none" stroke="${d.frameColor}" stroke-width="${fw * .7}"/>`;
+    } else frame = `<path d="${shapePath(fShape, ...fBox, fr)}" fill="none" stroke="${d.frameColor}" stroke-width="${fw}" ${dash}/>`;
+  }
+  const stubX = 302;
+  const stubLine = d.stub ? `<line x1="${stubX}" y1="${inr[1] + 3}" x2="${stubX}" y2="${inr[3] - 3}" stroke="${d.border}" stroke-width="3" stroke-dasharray="7 6" stroke-linecap="round"/>` : '';
+  const pat = d.pattern !== 'none' ? `<g clip-path="url(#cp${id})" opacity="${d.patternOpacity}">${patternSVG(d, id, inr, c.title + d.bg)}</g>` : '';
+
+  const svg = `<svg class="c-bg" viewBox="0 0 ${W} ${H}" aria-hidden="true">
+    <defs><clipPath id="cp${id}"><path d="${innerP}"/></clipPath></defs>
+    <path d="${outerP}" fill="${d.border}"/>
+    <path d="${innerP}" fill="${d.bg}"/>
+    ${pat}${frame}${stubLine}
+  </svg>`;
+
+  // text box (percentages of the 400x200 box)
+  const tIn = fi + 5;
+  const rightEdge = d.stub ? (W - stubX + 6) : tIn;
+  const px = v => (v / W * 100).toFixed(2) + '%', py = v => (v / H * 100).toFixed(2) + '%';
+  const iconHTML = d.iconImg ? `<img src="${d.iconImg}" alt="">` : esc(d.icon);
+  const icon2HTML = d.iconImg ? iconHTML : esc(d.icon2 || d.icon);
+  const hasIcon = d.iconPos !== 'none' && (d.iconImg || d.icon);
+  const leftI = hasIcon && (d.iconPos === 'left' || d.iconPos === 'both');
+  const rightI = hasIcon && (d.iconPos === 'right' || d.iconPos === 'both');
+  const shadow = { none:'none', soft:'0 .5cqw 1cqw rgba(0,0,0,.28)', pop:`.55cqw .55cqw 0 ${d.hlColor}`,
+    outline:`-.35cqw 0 ${d.bg}, .35cqw 0 ${d.bg}, 0 -.35cqw ${d.bg}, 0 .35cqw ${d.bg}, .3cqw .3cqw ${d.bg}, -.3cqw -.3cqw ${d.bg}` }[d.shadow];
+  const ff = f => `'${f}', cursive`;
+
+  let icons = '';
+  if (leftI)  icons += `<div class="c-icon" style="left:${px(tIn - 2)};top:50%;font-size:${d.iconSize}cqw;transform:translateY(-50%) rotate(${d.iconRot}deg)">${iconHTML}</div>`;
+  if (rightI) icons += `<div class="c-icon" style="right:${px(rightEdge - 2)};top:50%;font-size:${d.iconSize}cqw;transform:translateY(-50%) rotate(${-d.iconRot}deg)">${icon2HTML}</div>`;
+  if (hasIcon && d.iconPos === 'corner') icons += `<div class="c-icon" style="right:${d.stub ? '26%' : '1.5%'};top:-7%;font-size:${d.iconSize * 1.1}cqw;transform:rotate(${d.iconRot}deg)">${iconHTML}</div>`;
+
+  const textStyle = [
+    `left:calc(${px(tIn)} + ${leftI ? d.iconSize * 1.02 : 0}cqw)`,
+    `right:calc(${px(rightEdge)} + ${rightI ? d.iconSize * 1.02 : 0}cqw)`,
+    `top:${py(tIn - 2)}`, `bottom:${py(tIn - 2)}`,
+  ].join(';');
+
+  const st = opts.status || (c.id ? couponStatus(c) : 'available');
+  const stamp = st === 'used' ? `<div class="c-stamp"><span>USED ✓</span></div>` : st === 'expired' ? `<div class="c-stamp exp"><span>EXPIRED</span></div>` : '';
+  const badge = c.uses_total > 1 && opts.badge !== false ? `<div class="c-badge">${c.id ? `${c.uses_left ?? c.uses_total}/${c.uses_total}` : `×${c.uses_total}`}</div>` : '';
+
+  return `<div class="coupon ${st === 'used' || st === 'expired' ? 'is-used' : ''} ${opts.cls || ''}">
+    ${svg}${icons}
+    <div class="c-text" style="${textStyle}">
+      <div class="c-inner" style="text-align:${d.align}">
+        ${hasIcon && d.iconPos === 'top' ? `<div class="c-topicon" style="font-size:${d.iconSize}cqw">${iconHTML}</div>` : ''}
+        <div class="c-title" style="font-family:${ff(d.titleFont)};font-size:calc(${d.titleSize}cqw * var(--fit,1));color:${d.titleColor};text-shadow:${shadow};${d.upper ? 'text-transform:uppercase;' : ''}">${fmtTitle(c.title, d.hlColor)}</div>
+        ${c.subtitle ? `<div class="c-sub" style="font-family:${ff(d.bodyFont)};font-size:calc(${d.subSize}cqw * var(--fit,1));color:${d.textColor}">${esc(c.subtitle)}</div>` : ''}
+        ${c.fine_print ? `<div class="c-fine" style="font-family:${ff(d.bodyFont)};font-size:calc(${d.fineSize}cqw * var(--fit,1));color:${d.textColor}">${esc(c.fine_print)}</div>` : ''}
+      </div>
+    </div>
+    ${d.stub ? `<div class="c-stub" style="left:${px(stubX + 4)};right:${px(fi)};top:${py(fi)};bottom:${py(fi)};font-family:${ff(d.bodyFont)};font-size:4.6cqw;color:${d.textColor}">${esc(d.stubText)}</div>` : ''}
+    ${badge}${stamp}
+  </div>`;
+}
+
+// Shrink text until it fits its box.
+function fitCoupon(el) {
+  const box = el.querySelector('.c-text'), inner = el.querySelector('.c-inner');
+  if (!box || !box.clientHeight) return;
+  let f = 1; box.style.setProperty('--fit', 1);
+  while ((inner.offsetHeight > box.clientHeight + 1 || inner.scrollWidth > box.clientWidth + 1) && f > .35) {
+    f -= .05; box.style.setProperty('--fit', f.toFixed(2));
+  }
+}
+function fitAll(root = document) { requestAnimationFrame(() => $$('.coupon', root).forEach(fitCoupon)); }
+
+/* =====================================================================
+   App state
+   ===================================================================== */
+const S = {
+  cfg: store.get('cp_cfg', { url: DEFAULT_URL, token: '' }),
+  me: null, partner: null, names: { A: 'Person A', B: 'Person B' },
+  received: [], sent: [],
+  drafts: store.get('cp_drafts', []),
+  seen: new Set(store.get('cp_seen', [])),
+  cur: store.get('cp_cur', null) || fromPreset(PRESETS[0]),
+  editingId: null, draftId: null,
+  recvFilter: 'available', sentFilter: 'all', emojiTarget: 'icon', tab: 'create', loaded: false,
+};
+S.cur.design = sanitizeDesign(S.cur.design);
+const myName = () => S.me ? S.names[S.me] : 'You';
+const partnerName = () => S.partner ? S.names[S.partner] : 'your partner';
+
+/* =====================================================================
+   Server API
+   ===================================================================== */
+async function api(method, path, body) {
+  if (!S.cfg.url || !S.cfg.token) throw new Error('Connect to your server in Settings first.');
+  let res;
+  try {
+    res = await fetch(S.cfg.url.replace(/\/+$/, '') + path, {
+      method,
+      headers: { Authorization: 'Bearer ' + S.cfg.token, ...(body ? { 'Content-Type': 'application/json' } : {}) },
+      body: body ? JSON.stringify(body) : undefined,
+    });
+  } catch { throw new Error('Could not reach the server. Check the URL and your connection.'); }
+  let data = {}; try { data = await res.json(); } catch {}
+  if (res.status === 401) throw new Error('The server did not accept your key.');
+  if (!res.ok) throw new Error(data.error || `Server error (${res.status})`);
+  return data;
+}
+
+async function connect(silent) {
+  if (!S.cfg.url || !S.cfg.token) { renderWho(); renderLists(); return false; }
+  try {
+    const r = await api('GET', '/api/me');
+    S.me = r.user; S.partner = r.partner; S.names = { ...S.names, ...r.names };
+    renderWho();
+    await refreshLists(true);
+    if (!silent) toast(`Connected! Hi ${myName()} 👋`);
+    return true;
+  } catch (e) {
+    S.me = null; renderWho(); renderLists();
+    if (!silent) toast(e.message, 4000);
+    $('#cfgStatus').textContent = '⚠️ ' + e.message;
+    return false;
+  }
+}
+
+async function refreshLists(quiet) {
+  if (!S.me) return;
+  try {
+    const [r, s] = await Promise.all([api('GET', '/api/coupons/received'), api('GET', '/api/coupons/sent')]);
+    S.received = r.coupons; S.sent = s.coupons; S.loaded = true;
+    renderLists();
+  } catch (e) { if (!quiet) toast(e.message, 4000); }
+}
+
+/* =====================================================================
+   Header / tabs
+   ===================================================================== */
+function renderWho() {
+  const w = $('#who');
+  if (S.me) w.innerHTML = `<b>${esc(myName())}</b> 💞 ${esc(partnerName())}`;
+  else w.textContent = S.cfg.url ? 'Offline' : 'Not connected';
+  $('#recvTitle').textContent = S.me ? `From ${partnerName()}` : 'Coupons for you';
+  $('#sentTitle').textContent = S.me ? `For ${partnerName()}` : 'Coupons you gave';
+  $('#sendBtn').innerHTML = S.editingId ? 'Save changes 💾' : `Send${S.me ? ' to ' + esc(partnerName()) : ''} 💌`;
+  $('#myName').value = S.me ? myName() : '';
+  $('#cfgUrl').value = S.cfg.url; $('#cfgToken').value = S.cfg.token;
+  if (S.me) $('#cfgStatus').textContent = `✅ Connected as ${myName()} (${S.me})`;
+  $('#keyBtn').classList.toggle('warn', !S.me);
+  $('#keyBtn').title = S.me ? `Connected as ${myName()} — change key` : 'Enter your secret key';
+}
+
+function showTab(tab) {
+  S.tab = tab;
+  $$('section.view').forEach(s => s.classList.toggle('on', s.id === 'view-' + tab));
+  $$('[data-tab]').forEach(b => b.classList.toggle('on', b.dataset.tab === tab));
+  window.scrollTo({ top: 0 });
+  fitAll($('#view-' + tab));
+  if ((tab === 'received' || tab === 'sent') && S.me) refreshLists(true);
+}
+$$('[data-tab]').forEach(b => b.addEventListener('click', () => showTab(b.dataset.tab)));
+
+/* =====================================================================
+   Received & Sent lists
+   ===================================================================== */
+function emptyState(icon, text) { return `<div class="empty" style="grid-column:1/-1"><div class="big">${icon}</div><p>${text}</p></div>`; }
+
+function metaPills(c, mode) {
+  const st = couponStatus(c), p = [];
+  if (mode === 'received' && st === 'available' && !S.seen.has(c.id)) p.push('<span class="pill new">NEW</span>');
+  p.push(st === 'used' ? '<span class="pill used">Used</span>' : st === 'expired' ? '<span class="pill exp">Expired</span>' :
+    `<span class="pill ok">${c.uses_total > 1 ? c.uses_left + ' of ' + c.uses_total + ' left' : (mode === 'sent' && c.uses_left === c.uses_total ? 'Not used yet' : 'Ready')}</span>`);
+  if (c.expires_at && st !== 'used') p.push(`<span>until ${fmtDate(c.expires_at)}</span>`);
+  p.push(`<span style="margin-left:auto">${fmtDate(c.created_at)}</span>`);
+  return p.join('');
+}
+
+function renderLists() {
+  const notConn = emptyState('🔌', `Connect to your server in <a href="#" data-go="settings">Settings</a> to see coupons.`);
+  const filt = (list, f) => list.filter(c => f === 'all' ? true : f === 'used' ? couponStatus(c) !== 'available' : couponStatus(c) === 'available');
+
+  const rg = $('#receivedGrid'), sg = $('#sentGrid');
+  if (!S.me) { rg.innerHTML = notConn; sg.innerHTML = notConn; }
+  else {
+    const r = filt(S.received, S.recvFilter);
+    rg.innerHTML = r.length ? r.map(c => `<button class="card" data-open="received" data-id="${c.id}">${renderCoupon(c)}<div class="card-meta">${metaPills(c, 'received')}</div></button>`).join('')
+      : emptyState('🎁', S.received.length ? 'Nothing here with this filter.' : `No coupons yet. Maybe drop ${esc(partnerName())} a hint 😉`);
+    const s = filt(S.sent, S.sentFilter);
+    sg.innerHTML = s.length ? s.map(c => `<button class="card" data-open="sent" data-id="${c.id}">${renderCoupon(c)}<div class="card-meta">${metaPills(c, 'sent')}</div></button>`).join('')
+      : emptyState('💌', S.sent.length ? 'Nothing here with this filter.' : `You haven't sent anything yet. Go make ${esc(partnerName())} smile!`);
+  }
+  const unseen = S.received.filter(c => couponStatus(c) === 'available' && !S.seen.has(c.id)).length;
+  $$('[data-badge]').forEach(b => b.textContent = unseen || '');
+  fitAll($('#view-received')); fitAll($('#view-sent'));
+}
+
+function bindSeg(el, fn) {
+  el.addEventListener('click', e => {
+    const b = e.target.closest('button[data-v]'); if (!b) return;
+    $$('button', el).forEach(x => x.classList.toggle('on', x === b)); fn(b.dataset.v);
+  });
+}
+bindSeg($('#recvFilter'), v => { S.recvFilter = v; renderLists(); });
+bindSeg($('#sentFilter'), v => { S.sentFilter = v; renderLists(); });
+$$('[data-refresh]').forEach(b => b.addEventListener('click', async () => { b.disabled = true; await refreshLists(); b.disabled = false; }));
+document.addEventListener('click', e => {
+  const go = e.target.closest('[data-go]'); if (go) { e.preventDefault(); showTab(go.dataset.go); return; }
+  const card = e.target.closest('[data-open]');
+  if (card) {
+    const list = card.dataset.open === 'received' ? S.received : S.sent;
+    const c = list.find(x => x.id === card.dataset.id); if (c) openCoupon(c, card.dataset.open);
+  }
+});
+
+/* =====================================================================
+   Coupon detail modal (use / edit / delete)
+   ===================================================================== */
+const modal = $('#modal');
+$('#modalClose').onclick = () => modal.close();
+modal.addEventListener('click', e => { if (e.target === modal) modal.close(); });
+
+// Two-tap confirmation (no browser pop-ups).
+function confirmTap(btn, label, fn) {
+  const orig = btn.innerHTML; let armed = false, t;
+  btn.addEventListener('click', async () => {
+    if (!armed) { armed = true; btn.innerHTML = label; t = setTimeout(() => { armed = false; btn.innerHTML = orig; }, 3500); return; }
+    clearTimeout(t); btn.disabled = true;
+    try { await fn(); } finally { btn.disabled = false; armed = false; btn.innerHTML = orig; }
+  });
+}
+
+function openCoupon(c, mode, justUsed) {
+  const st = couponStatus(c);
+  if (mode === 'received' && !S.seen.has(c.id)) { S.seen.add(c.id); store.set('cp_seen', [...S.seen]); renderLists(); }
+  const who = mode === 'received' ? `From <b>${esc(partnerName())}</b>` : `For <b>${esc(partnerName())}</b>`;
+  $('#modalBody').innerHTML = `
+    <div class="modal-coupon">${renderCoupon(c, { cls: justUsed ? 'just-used' : '' })}</div>
+    <div class="row" style="gap:8px">${who} · ${fmtDate(c.created_at)} ${metaPills({ ...c, created_at: null }, mode).replace(/<span style="margin-left:auto">.*?<\/span>/, '')}</div>
+    ${mode === 'received' && st === 'available' ? `
+      <label>Add a little note <small>(optional)</small><input type="text" id="redeemNote" maxlength="280" placeholder="Tonight at 8? 😉"></label>
+      <button class="btn primary big" id="redeemBtn">Use this coupon ✨</button>` : ''}
+    ${mode === 'sent' ? `<div class="row">
+      ${c.uses_left === c.uses_total ? '<button class="btn" id="editBtn">✏️ Edit</button>' : ''}
+      <button class="btn" id="dupBtn">⧉ Make a copy</button>
+      <button class="btn danger" id="delBtn" style="margin-left:auto">🗑 Delete</button></div>` : ''}
+    <div><b style="font-size:13px">History</b><div class="hist" id="hist"><span class="muted">Loading…</span></div></div>`;
+  if (!modal.open) modal.showModal();
+  fitAll($('#modalBody'));
+  loadHistory(c.id);
+
+  const rb = $('#redeemBtn');
+  if (rb) confirmTap(rb, 'Tap again to confirm 💫', async () => {
+    try {
+      const r = await api('POST', `/api/coupons/${c.id}/redeem`, { note: $('#redeemNote').value });
+      const i = S.received.findIndex(x => x.id === c.id); if (i > -1) S.received[i] = r.coupon;
+      renderLists(); openCoupon(r.coupon, 'received', r.coupon.uses_left === 0); confetti();
+      toast(`${partnerName()} will see you used it 💖`);
+    } catch (e) { toast(e.message, 4000); }
+  });
+  const eb = $('#editBtn');
+  if (eb) eb.onclick = () => { loadIntoDesigner(c, { editingId: c.id }); modal.close(); showTab('create'); };
+  const db = $('#dupBtn');
+  if (db) db.onclick = () => { loadIntoDesigner(c, {}); modal.close(); showTab('create'); toast('Copy loaded — change anything and send it'); };
+  const xb = $('#delBtn');
+  if (xb) confirmTap(xb, 'Tap again to delete', async () => {
+    try {
+      await api('DELETE', `/api/coupons/${c.id}`);
+      S.sent = S.sent.filter(x => x.id !== c.id); renderLists(); modal.close(); toast('Coupon deleted');
+    } catch (e) { toast(e.message, 4000); }
+  });
+}
+
+async function loadHistory(id) {
+  const h = $('#hist');
+  try {
+    const r = await api('GET', `/api/coupons/${id}/history`);
+    if (!h.isConnected) return;
+    h.innerHTML = r.history.length ? r.history.map(x =>
+      `<div>✨ Used by <b>${esc(S.names[x.redeemed_by] || x.redeemed_by)}</b> on ${fmtDate(x.redeemed_at)}${x.note ? ` — “${esc(x.note)}”` : ''}</div>`).join('')
+      : '<span class="muted">Not used yet.</span>';
+  } catch { h.innerHTML = '<span class="muted">Could not load history.</span>'; }
+}
+
+/* =====================================================================
+   Designer
+   ===================================================================== */
+function buildControls() {
+  // fonts
+  const opts = FONTS.map(f => `<option value="${f}" style="font-family:'${f}'">${f}</option>`).join('');
+  $('#titleFontSel').innerHTML = opts; $('#bodyFontSel').innerHTML = opts;
+  // shapes (with little previews)
+  $('#shapeSeg').innerHTML = SHAPES.map(([k, n]) => {
+    const pad = k === 'scallop' ? 12 : 4;
+    return `<button data-v="${k}"><svg viewBox="0 0 400 200"><path d="${shapePath(k, pad, pad, 400 - pad, 200 - pad, 24)}" fill="currentColor" opacity=".8"/></svg>${n}</button>`;
+  }).join('');
+  $('#patternSeg').innerHTML = PATTERNS.map(([k, n]) => `<button data-v="${k}">${n}</button>`).join('');
+  $('#palettes').innerHTML = PALETTES.map(([n, p], i) =>
+    `<button data-pal="${i}"><i><b style="background:${p.bg}"></b><b style="background:${p.border}"></b><b style="background:${p.titleColor}"></b><b style="background:${p.hlColor}"></b></i>${n}</button>`).join('');
+  $('#emojis').innerHTML = EMOJIS.map(e => `<button data-emoji="${e}">${e}</button>`).join('');
+  $('#templates').innerHTML = PRESETS.map((p, i) => `<button data-tpl="${i}">${renderCoupon(fromPreset(p), { badge: false })}${esc(p.name)}</button>`).join('');
+}
+
+function setVal(el, v) {
+  if (el.type === 'checkbox') el.checked = !!v;
+  else if (el.type === 'color') { if (/^#[0-9a-f]{6}$/i.test(v)) el.value = v; }
+  else el.value = v ?? '';
+}
+function syncForm() {
+  const c = S.cur, d = c.design;
+  $$('#controls [data-f]').forEach(el => setVal(el, c[el.dataset.f]));
+  $$('#controls input[data-d], #controls select[data-d], #controls textarea[data-d]').forEach(el => setVal(el, d[el.dataset.d]));
+  $$('#controls .seg[data-d]').forEach(seg => $$('button', seg).forEach(b => b.classList.toggle('on', b.dataset.v === String(d[seg.dataset.d]))));
+  $$('#controls output[data-o]').forEach(o => { const k = o.dataset.o, v = d[k]; o.textContent = k === 'patternOpacity' ? Math.round(v * 100) + '%' : k === 'iconRot' ? v + '°' : v; });
+  $('#imgPreview').hidden = !d.iconImg; $('#imgRemove').hidden = !d.iconImg; if (d.iconImg) $('#imgPreview').src = d.iconImg;
+  $('#editBanner').hidden = !S.editingId;
+  renderWho();
+}
+
+let rafP, saveT;
+function renderPreview() {
+  cancelAnimationFrame(rafP);
+  rafP = requestAnimationFrame(() => {
+    $('#preview').innerHTML = renderCoupon({ ...S.cur, design: S.cur.design }, { status: 'available' });
+    fitCoupon($('#preview .coupon'));
+  });
+  clearTimeout(saveT); saveT = setTimeout(() => store.set('cp_cur', S.cur), 400);
+}
+
+const controls = $('#controls');
+controls.addEventListener('input', e => {
+  const el = e.target;
+  if (el.dataset.f) {
+    let v = el.value;
+    if (el.dataset.f === 'uses_total') v = Math.max(1, Math.min(99, parseInt(v, 10) || 1));
+    S.cur[el.dataset.f] = v;
+  } else if (el.dataset.d) {
+    const k = el.dataset.d;
+    S.cur.design[k] = el.type === 'checkbox' ? el.checked : el.type === 'range' ? Number(el.value) : el.value;
+    const o = $(`output[data-o="${k}"]`); if (o) o.textContent = k === 'patternOpacity' ? Math.round(el.value * 100) + '%' : k === 'iconRot' ? el.value + '°' : el.value;
+    if (k === 'stub' && el.checked && !S.cur.design.stubText) S.cur.design.stubText = 'ADMIT ONE';
+  } else return;
+  renderPreview();
+});
+controls.addEventListener('click', e => {
+  const segBtn = e.target.closest('.seg[data-d] button[data-v]');
+  if (segBtn) {
+    const k = segBtn.closest('.seg').dataset.d; S.cur.design[k] = segBtn.dataset.v;
+    if (k === 'pattern' && segBtn.dataset.v !== 'none' && S.cur.design.patternOpacity < .15) S.cur.design.patternOpacity = .45;
+    syncForm(); renderPreview(); return;
+  }
+  const pal = e.target.closest('[data-pal]');
+  if (pal) { Object.assign(S.cur.design, PALETTES[pal.dataset.pal][1]); syncForm(); renderPreview(); return; }
+  const em = e.target.closest('[data-emoji]');
+  if (em) {
+    const d = S.cur.design; d[S.emojiTarget] = em.dataset.emoji; d.iconImg = '';
+    if (d.iconPos === 'none') d.iconPos = 'left';
+    if (S.emojiTarget === 'icon2' && d.iconPos !== 'both') d.iconPos = 'both';
+    syncForm(); renderPreview(); return;
+  }
+  const tpl = e.target.closest('[data-tpl]');
+  if (tpl) {
+    const keep = { uses_total: S.cur.uses_total, expires_at: S.cur.expires_at };
+    S.cur = { ...fromPreset(PRESETS[tpl.dataset.tpl]), ...keep };
+    syncForm(); renderPreview();
+  }
+});
+bindSeg($('#emojiTarget'), v => S.emojiTarget = v);
+
+// Own picture -> tiny data URL stored inside the design.
+$('#imgInput').addEventListener('change', async e => {
+  const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+  try {
+    const img = await new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = URL.createObjectURL(f); });
+    let size = 128, data = '';
+    const cv = document.createElement('canvas'), cx = cv.getContext('2d');
+    for (let t = 0; t < 6; t++) {
+      const s = Math.min(1, size / Math.max(img.width, img.height));
+      cv.width = Math.max(1, Math.round(img.width * s)); cv.height = Math.max(1, Math.round(img.height * s));
+      cx.clearRect(0, 0, cv.width, cv.height); cx.drawImage(img, 0, 0, cv.width, cv.height);
+      data = cv.toDataURL('image/webp', .8);
+      if (!data.startsWith('data:image/webp')) data = cv.toDataURL('image/png');
+      if (data.length > 12000) data = cv.toDataURL('image/jpeg', .75);
+      if (data.length <= 12000) break;
+      size -= 20;
+    }
+    if (data.length > 12000) return toast('That picture is too detailed, try a simpler one.');
+    S.cur.design.iconImg = data; if (S.cur.design.iconPos === 'none') S.cur.design.iconPos = 'left';
+    syncForm(); renderPreview();
+  } catch { toast('Could not read that image.'); }
+});
+$('#imgRemove').onclick = () => { S.cur.design.iconImg = ''; syncForm(); renderPreview(); };
+
+$('#surprise').onclick = () => {
+  const d = S.cur.design;
+  Object.assign(d, pick(PALETTES)[1], {
+    shape: pick(SHAPES)[0], pattern: pick(PATTERNS)[0], titleFont: pick(FONTS.slice(0, 11)), bodyFont: pick(['Patrick Hand','Kalam','Gochi Hand','Fredoka']),
+    frame: pick(ENUMS.frame), radius: 12 + Math.round(Math.random() * 20), borderW: 6 + Math.round(Math.random() * 12),
+    icon: pick(EMOJIS), icon2: pick(EMOJIS), iconImg: '', iconPos: pick(['left','right','both','top','corner']),
+    iconRot: Math.round(Math.random() * 30 - 15), shadow: pick(ENUMS.shadow), patternOpacity: .3 + Math.random() * .4,
+  });
+  syncForm(); renderPreview();
+};
+$('#resetBtn').onclick = () => { S.cur = blankCoupon(); S.editingId = null; S.draftId = null; syncForm(); renderPreview(); };
+$('#cancelEdit').onclick = () => { S.editingId = null; S.cur = blankCoupon(); syncForm(); renderPreview(); };
+
+function loadIntoDesigner(c, { editingId = null, draftId = null }) {
+  S.cur = { title: c.title, subtitle: c.subtitle || '', fine_print: c.fine_print || '', uses_total: c.uses_total || 1, expires_at: c.expires_at || '', design: sanitizeDesign(c.design) };
+  S.editingId = editingId; S.draftId = draftId;
+  syncForm(); renderPreview();
+}
+
+function payload() {
+  return { title: S.cur.title.trim(), subtitle: S.cur.subtitle.trim(), fine_print: S.cur.fine_print.trim(),
+    design: sanitizeDesign(S.cur.design), uses_total: Number(S.cur.uses_total) || 1, expires_at: S.cur.expires_at || null };
+}
+
+$('#sendBtn').onclick = async () => {
+  const p = payload();
+  if (!p.title) return toast('Write something on the coupon first ✏️');
+  if (!S.me) { toast('Connect to your server first'); return showTab('settings'); }
+  const btn = $('#sendBtn'); btn.disabled = true;
+  try {
+    if (S.editingId) {
+      const r = await api('PUT', `/api/coupons/${S.editingId}`, p);
+      S.sent = S.sent.map(x => x.id === r.coupon.id ? r.coupon : x);
+      toast('Changes saved 💾');
+    } else {
+      const r = await api('POST', '/api/coupons', p);
+      S.sent.unshift(r.coupon);
+      toast(`Sent to ${partnerName()} 💌`); confetti();
+    }
+    if (S.draftId) { S.drafts = S.drafts.filter(x => x.localId !== S.draftId); store.set('cp_drafts', S.drafts); renderDrafts(); }
+    S.editingId = null; S.draftId = null; syncForm(); renderLists();
+  } catch (e) { toast(e.message, 4000); }
+  finally { btn.disabled = false; }
+};
+
+$('#draftBtn').onclick = () => {
+  const p = payload(); if (!p.title) return toast('Write something first ✏️');
+  if (S.draftId) S.drafts = S.drafts.map(x => x.localId === S.draftId ? { ...p, localId: S.draftId } : x);
+  else { S.draftId = 'd' + Date.now(); S.drafts.unshift({ ...p, localId: S.draftId }); }
+  store.set('cp_drafts', S.drafts); renderDrafts(); toast('Draft saved on this device');
+};
+
+function renderDrafts() {
+  $('#draftCount').textContent = S.drafts.length;
+  $('#drafts').innerHTML = S.drafts.length ? S.drafts.map(d => `<div class="draft">${renderCoupon(d, { badge: false })}
+      <div class="row"><button class="btn sm" data-load="${d.localId}">Open</button><button class="btn sm danger" data-deldraft="${d.localId}">✕</button></div></div>`).join('')
+    : '<p class="hint" style="grid-column:1/-1;margin:0">Drafts you save stay only on this device until you send them.</p>';
+  fitAll($('#drafts'));
+}
+$('#drafts').addEventListener('click', e => {
+  const l = e.target.closest('[data-load]'), x = e.target.closest('[data-deldraft]');
+  if (l) { const d = S.drafts.find(v => v.localId === l.dataset.load); if (d) { loadIntoDesigner(d, { draftId: d.localId }); window.scrollTo({ top: 0, behavior: 'smooth' }); } }
+  if (x) { S.drafts = S.drafts.filter(v => v.localId !== x.dataset.deldraft); if (S.draftId === x.dataset.deldraft) S.draftId = null; store.set('cp_drafts', S.drafts); renderDrafts(); }
+});
+
+/* =====================================================================
+   Settings
+   ===================================================================== */
+$('#cfgSave').onclick = async () => {
+  S.cfg = { url: $('#cfgUrl').value.trim(), token: $('#cfgToken').value.trim() };
+  store.set('cp_cfg', S.cfg);
+  $('#cfgStatus').textContent = 'Connecting…';
+  if (await connect()) showTab('received');
+};
+$('#nameSave').onclick = async () => {
+  const name = $('#myName').value.trim(); if (!name) return;
+  try { await api('PUT', '/api/me', { name }); S.names[S.me] = name; renderWho(); toast('Name saved'); } catch (e) { toast(e.message, 4000); }
+};
+$('#copyLink').onclick = async () => {
+  if (!S.cfg.url || !S.cfg.token) return toast('Save your connection first');
+  const link = location.href.split('#')[0] + '#setup=' + btoa(unescape(encodeURIComponent(JSON.stringify(S.cfg))));
+  try { await navigator.clipboard.writeText(link); toast('Setup link copied 🔗'); }
+  catch { prompt('Copy this link:', link); }
+};
+$('#forget').onclick = () => {
+  store.del('cp_cfg'); S.cfg = { url: DEFAULT_URL, token: '' }; S.me = null; S.received = []; S.sent = [];
+  renderWho(); renderLists(); $('#cfgStatus').textContent = ''; toast('Disconnected on this device');
+};
+
+/* =====================================================================
+   Boot
+   ===================================================================== */
+(function readSetupLink() {
+  const m = location.hash.match(/#setup=([^&]+)/);
+  if (!m) return;
+  try {
+    const cfg = JSON.parse(decodeURIComponent(escape(atob(m[1]))));
+    if (cfg.url && cfg.token) { S.cfg = { url: String(cfg.url), token: String(cfg.token) }; store.set('cp_cfg', S.cfg); }
+  } catch {}
+  history.replaceState(null, '', location.pathname + location.search);
+})();
+
+buildControls();
+syncForm();
+renderPreview();
+renderDrafts();
+renderLists();
+fitAll($('#templates'));
+/* ---------- key pop-up ---------- */
+const keyModal = $('#keyModal');
+function openKeyModal() {
+  $('#keyToken').value = S.cfg.token || ''; $('#keyUrl').value = S.cfg.url || DEFAULT_URL;
+  $('#keyStatus').textContent = S.me ? `Connected as ${myName()} (${S.me})` : '';
+  keyModal.showModal(); setTimeout(() => $('#keyToken').focus(), 50);
+}
+$('#keyBtn').onclick = openKeyModal;
+$('#keyClose').onclick = () => keyModal.close();
+$('#keyShow').onclick = () => { const i = $('#keyToken'); i.type = i.type === 'password' ? 'text' : 'password'; };
+$('#keyForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const token = $('#keyToken').value.trim(); if (!token) return;
+  S.cfg = { url: ($('#keyUrl').value.trim() || DEFAULT_URL), token };
+  store.set('cp_cfg', S.cfg);
+  $('#keyStatus').textContent = 'Connecting…'; $('#keySave').disabled = true;
+  const ok = await connect(true);
+  $('#keySave').disabled = false;
+  if (ok) { keyModal.close(); toast(`Connected! Hi ${myName()} 👋`); showTab('received'); }
+  else $('#keyStatus').textContent = '⚠️ ' + ($('#cfgStatus').textContent.replace(/^⚠️ /, '') || 'Could not connect');
+});
+
+connect(true).then(ok => { if (!ok && !S.cfg.token) openKeyModal(); });
+
+let resizeT;
+addEventListener('resize', () => { clearTimeout(resizeT); resizeT = setTimeout(() => fitAll(document), 150); });
+if (document.fonts) { document.fonts.ready.then(() => fitAll(document)); document.fonts.addEventListener?.('loadingdone', () => fitAll(document)); }
+// Gentle auto-refresh so new coupons show up.
+setInterval(() => { if (S.me && document.visibilityState === 'visible') refreshLists(true); }, 60000);
+document.addEventListener('visibilitychange', () => { if (S.me && document.visibilityState === 'visible') refreshLists(true); });
+</script>
+</body>
+</html>
